@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대학생 시간표</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📚 나의 시간표</h1>
+        
+        <div class="content-wrapper">
+            <!-- 시간표 -->
+            <div class="schedule-section">
+                <h2>시간표</h2>
+                <div class="schedule-table">
+                    <div class="table-header">
+                        <div class="time-cell">시간</div>
+                        <div class="day-cell">월</div>
+                        <div class="day-cell">화</div>
+                        <div class="day-cell">수</div>
+                        <div class="day-cell">목</div>
+                        <div class="day-cell">금</div>
+                    </div>
+                    
+                    <!-- 시간표 행들 (1교시~8교시 30분단위) -->
+                    <div id="schedule-body"></div>
+                </div>
+            </div>
+
+            <!-- 입력 폼 -->
+            <div class="form-section">
+                <h2>강의 추가</h2>
+                <form id="lecture-form">
+                    <div class="form-group">
+                        <label for="lecture-name">강의명</label>
+                        <input type="text" id="lecture-name" placeholder="예: 웹프로그래밍" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lecture-room">강의실</label>
+                        <input type="text" id="lecture-room" placeholder="예: 공학관 301호" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lecture-day">요일</label>
+                        <select id="lecture-day" required>
+                            <option value="">선택하세요</option>
+                            <option value="mon">월요일</option>
+                            <option value="tue">화요일</option>
+                            <option value="wed">수요일</option>
+                            <option value="thu">목요일</option>
+                            <option value="fri">금요일</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lecture-start">시작 시간</label>
+                        <select id="lecture-start" required>
+                            <option value="">선택하세요</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lecture-duration">수업 시간 (분)</label>
+                        <select id="lecture-duration" required>
+                            <option value="">선택하세요</option>
+                            <option value="30">30분</option>
+                            <option value="60">1시간</option>
+                            <option value="90">1시간 30분</option>
+                            <option value="120">2시간</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-add">강의 추가</button>
+                </form>
+
+                <div id="lecture-list" class="lecture-list">
+                    <h3>추가된 강의</h3>
+                    <ul id="lectures"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
