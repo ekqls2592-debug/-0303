@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문다빈 - 포트폴리오</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            padding: 60px 0;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .header-content {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .major {
+            font-size: 1.3rem;
+            color: #666;
+            font-weight: 300;
+        }
+
+        /* Sections */
+        section {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.8s ease-out;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: #667eea;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .project-card:hover::before {
+            opacity: 0.9;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .project-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+
+        .project-card:hover h3,
+        .project-card:hover .project-desc {
+            color: white;
+        }
+
+        .project-desc {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background: white;
+            color: #667eea;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .tag {
+            background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.05);
+        }
+
+        .github-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .github-btn:hover {
+            background: white;
+            color: #667eea;
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .project-card:hover .github-btn {
+            background: white;
+            color: #667eea;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .skill-item {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .skill-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-item:hover .skill-icon {
+            transform: scale(1.2);
+        }
+
+        .skill-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+            transition: color 0.3s ease;
+            line-height: 1.4;
+        }
+
+        .skill-item:hover .skill-name {
+            color: white;
+        }
+
+        .skills-note {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 1rem;
+            color: #666;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .contact-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .contact-value {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            section {
+                padding: 30px 20px;
+            }
+
+            .projects-grid,
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>문다빈</h1>
+                <p class="major">산업시스템공학부 | 데이터 기반 서비스 기획</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- About Section -->
+        <section id="about">
+            <h2>About Me</h2>
+            <p class="about-text">
+                문제를 관찰하고 구조화하는 과정에 집중하는 데이터 기반 서비스 기획자 문다빈입니다.
+                사용자 리서치와 AI·데이터 활용을 통해 아이디어를 실행 가능한 서비스로 만듭니다.
+            </p>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>사내 공지가 읽히지 않는 문제를 해결한 AI 기반 내부 커뮤니케이션 개선 프로젝트</h3>
+                    <p class="project-desc">
+                        중견 제조기업 재경팀을 대상으로
+                        사내 공지가 반복적으로 누락되는 문제를 정의했습니다.<br><br>
+                        
+                        직원 설문과 딥다이브 인터뷰를 통해
+                        공지 과잉·중요도 구분 부재라는 원인을 도출하고,
+                        AI 요약 기반 공지 정리 서비스 기획안을 설계했습니다.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Service Planning</span>
+                        <span class="tag">UX Research</span>
+                        <span class="tag">Problem Definition</span>
+                        <span class="tag">AI Service</span>
+                    </div>
+                    <a href="#project-detail-01" class="github-btn">View Project</a>
+                </div>
+
+                <div class="project-card">
+                    <h3>대학생 학습 문제를 해결하는 AI 프롬프트 플랫폼 'AIM' 창업 프로젝트</h3>
+                    <p class="project-desc">
+                        대학생의 생성형 AI 활용 과정에서 발생하는
+                        결과 품질 저하와 반복 수정 문제를 핵심 문제로 정의했습니다.<br><br>
+                        
+                        64명 대상 설문조사와 시장 분석을 통해
+                        검증된 프롬프트 템플릿 기반 AI 플랫폼을 기획하고,
+                        사업계획서 및 MVP를 통해 창업경진대회에서 입상했습니다.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Startup Planning</span>
+                        <span class="tag">Problem Definition</span>
+                        <span class="tag">User Research</span>
+                        <span class="tag">AI Service</span>
+                    </div>
+                    <a href="#project-detail-02" class="github-btn">View Project</a>
+                </div>
+
+                <div class="project-card">
+                    <h3>B2B IT 서비스 스타트업에서 운영·영업 프로세스를 개선한 실무 경험</h3>
+                    <p class="project-desc">
+                        B2B IT 서비스 스타트업에서 운영·영업 실무를 담당하며,
+                        사용자 피드백 관리, 내부 운영 프로세스 정리,
+                        영업 미팅 확보 업무를 수행했습니다.<br><br>
+                        
+                        반복·비정형적인 잔업무를 AI 도구로 구조화해
+                        업무 처리 시간을 단축하고,
+                        팀의 운영 효율을 높이는 방향으로 기여했습니다.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Business Operations</span>
+                        <span class="tag">Sales Support</span>
+                        <span class="tag">Process Improvement</span>
+                        <span class="tag">AI 활용</span>
+                    </div>
+                    <a href="#project-detail-03" class="github-btn">View Project</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2>Skills & Tools</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-icon">⚛️</div>
+                    <div class="skill-name">Service Prototype<br>(React)</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">🟢</div>
+                    <div class="skill-name">Backend Structure 이해<br>(Node.js)</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">🐍</div>
+                    <div class="skill-name">Data & AI 활용<br>(Python)</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">☁️</div>
+                    <div class="skill-name">Service Deployment 이해<br>(AWS)</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">🧠</div>
+                    <div class="skill-name">Planning & Strategy</div>
+                </div>
+            </div>
+            <p class="skills-note">
+                ※ 개발자가 아닌, 기획자의 관점에서 기술을 활용합니다.
+            </p>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>Contact</h2>
+            <div class="contact-grid">
+                <a href="mailto:dabin@example.com" class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-label">Email</div>
+                    <div class="contact-value">dabin@example.com</div>
+                </a>
+                <a href="https://github.com/dabin" class="contact-item" target="_blank">
+                    <div class="contact-icon">💻</div>
+                    <div class="contact-label">GitHub</div>
+                    <div class="contact-value">github.com/dabin</div>
+                </a>
+                <a href="https://linkedin.com/in/dabin" class="contact-item" target="_blank">
+                    <div class="contact-icon">👔</div>
+                    <div class="contact-label">LinkedIn</div>
+                    <div class="contact-value">linkedin.com/in/dabin</div>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 문다빈. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll animation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // Add parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.project-card, .skill-item');
+            
+            parallaxElements.forEach((el, index) => {
+                const speed = 0.5 + (index * 0.1);
+                const yPos = -(scrolled * speed / 100);
+                el.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+
+        // Hover effect enhancement
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px) scale(1.02)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+    </script>
+</body>
+</html>
